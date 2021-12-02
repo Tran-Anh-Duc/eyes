@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GitHubController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
@@ -50,13 +51,16 @@ Route::middleware('auth')->group(function () {
 
 });
 
-//Route::prefix('google')->group(function (){
-//    Route::get('login',[SocialController::class,'redirect'])->name('login');
-//    Route::get('callback',[SocialController::class,'callback'])->name('callback');
-    Route::get('/auth/redirect/{provider}', [SocialController::class,'redirect']);
-    Route::get('/callback/{provider}', [SocialController::class, 'callback']);
-//});
+//Route::get('/auth/redirect/github', [GitHubController::class, 'gitRedirect']);
+//Route::get('/callback/github', [GitHubController::class, 'gitCallback']);
 
+Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
+Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
+//Route::prefix('google')->group(function (){
+
+Route::get('/auth/redirect/{provider}', [SocialController::class, 'redirect']);
+Route::get('/callback/{provider}', [SocialController::class, 'callback']);
+//});
 
 
 
